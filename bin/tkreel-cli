@@ -1,0 +1,97 @@
+#!/usr/bin/env node
+/**
+ * tkreel-cli v1.0.0
+ * 9:16 Short-Form Video Safe-Zone Geometry & Seedance Camera-Motion Spec CLI
+ * Official reference utility for https://tkreel.com
+ * License: MIT
+ */
+
+const ROUTES = [
+  {
+    "name": "TKReel Home",
+    "url": "https://tkreel.com/"
+  },
+  {
+    "name": "Reverse Video-to-Prompt Shot & Camera Analyzer",
+    "url": "https://tkreel.com/video-to-prompt"
+  },
+  {
+    "name": "Seedance 2.5 Structured Cinematography Prompt Generator",
+    "url": "https://tkreel.com/seedance-2-5-prompt-generator"
+  },
+  {
+    "name": "Seedance 2.5 Motion & Multi-Shot Model Reference",
+    "url": "https://tkreel.com/models/seedance-2-5"
+  },
+  {
+    "name": "Seedream 5.0 Pro Commercial Product Visual Reference",
+    "url": "https://tkreel.com/models/seedream-5-0-pro"
+  },
+  {
+    "name": "Black Friday Ecommerce Vertical Video Ad Templates",
+    "url": "https://tkreel.com/black-friday-ecommerce-ads"
+  }
+];
+
+const SPECS = [
+  {
+    "Platform Placement": "TikTok In-Feed / Spark Ad",
+    "Canvas Pixel Dimensions": "1080 x 1920 px (9:16)",
+    "Top Safe Margin": "130 px (status & tabs)",
+    "Bottom Caption Exclusion": "380 px (20% caption + CTA)",
+    "Right Action-Rail Exclusion": "140 px (13% avatar/like rail)"
+  },
+  {
+    "Platform Placement": "Instagram Reels Ad",
+    "Canvas Pixel Dimensions": "1080 x 1920 px (9:16)",
+    "Top Safe Margin": "210 px (header & audio)",
+    "Bottom Caption Exclusion": "420 px (22% shop CTA drawer)",
+    "Right Action-Rail Exclusion": "120 px (engagement icons)"
+  },
+  {
+    "Platform Placement": "YouTube Shorts Feed",
+    "Canvas Pixel Dimensions": "1080 x 1920 px (9:16)",
+    "Top Safe Margin": "140 px (search bar)",
+    "Bottom Caption Exclusion": "360 px (channel + title)",
+    "Right Action-Rail Exclusion": "135 px (thumbs/remix column)"
+  },
+  {
+    "Platform Placement": "Universal Safe Title Box",
+    "Canvas Pixel Dimensions": "810 x 1290 px inner core",
+    "Top Safe Margin": ">= 210 px from top edge",
+    "Bottom Caption Exclusion": ">= 420 px from bottom edge",
+    "Right Action-Rail Exclusion": "Left 60 px / Right 210 px"
+  }
+];
+
+const args = process.argv.slice(2);
+
+if (args.includes('--version') || args.includes('-v')) {
+  console.log('tkreel-cli v1.0.0 (https://tkreel.com)');
+  process.exit(0);
+}
+
+if (args.includes('--routes')) {
+  console.log(JSON.stringify({ domain: 'tkreel.com', endpoints: ROUTES }, null, 2));
+  process.exit(0);
+}
+
+if (args.includes('--specs') || args.includes('--json')) {
+  console.log(JSON.stringify({ domain: 'tkreel.com', benchmark: "1080x1920 (9:16) Vertical Ad HUD Safe-Zone & Bitrate Delivery Matrix", rows: SPECS }, null, 2));
+  process.exit(0);
+}
+
+console.log([
+  'TKReel CLI (tkreel-cli v1.0.0)',
+  '9:16 Short-Form Video Safe-Zone Geometry & Seedance Camera-Motion Spec CLI',
+  'Homepage: https://tkreel.com',
+  '',
+  'Usage:',
+  '  tkreel-cli --help       Show command overview and verified endpoints',
+  '  tkreel-cli --version    Print CLI version',
+  '  tkreel-cli --specs      Output domain technical specification matrix as JSON',
+  '  tkreel-cli --routes     Output verified production URLs as JSON',
+  '',
+  'Verified Production Endpoints:',
+  ...ROUTES.map((r) => '  - ' + r.name + ': ' + r.url),
+].join('\n'));
